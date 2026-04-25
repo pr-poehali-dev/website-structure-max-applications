@@ -4,167 +4,262 @@
 
 @layer base {
   :root {
-    --background: 40 30% 97%;
-    --foreground: 25 30% 12%;
-
+    --background: 36 33% 97%;
+    --foreground: 20 25% 10%;
     --card: 0 0% 100%;
-    --card-foreground: 25 30% 12%;
-
+    --card-foreground: 20 25% 10%;
     --popover: 0 0% 100%;
-    --popover-foreground: 25 30% 12%;
-
-    --primary: 28 85% 42%;
+    --popover-foreground: 20 25% 10%;
+    --primary: 24 80% 38%;
     --primary-foreground: 0 0% 100%;
-
-    --secondary: 40 25% 93%;
-    --secondary-foreground: 25 30% 12%;
-
-    --muted: 40 20% 93%;
-    --muted-foreground: 25 15% 45%;
-
-    --accent: 28 85% 42%;
+    --secondary: 36 25% 94%;
+    --secondary-foreground: 20 25% 10%;
+    --muted: 36 20% 93%;
+    --muted-foreground: 20 10% 48%;
+    --accent: 24 80% 38%;
     --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 84.2% 60.2%;
+    --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 100%;
+    --border: 32 22% 88%;
+    --input: 32 22% 88%;
+    --ring: 24 80% 38%;
+    --radius: 1rem;
 
-    --border: 35 20% 87%;
-    --input: 35 20% 87%;
-    --ring: 28 85% 42%;
-
-    --radius: 0.75rem;
-
-    --brand-brown: #8b4513;
-    --brand-orange: #d46a1a;
-    --brand-amber: #e8a040;
-    --brand-cream: #faf6f0;
-    --brand-green: #3d6b3d;
-    --brand-border: #e5d8c8;
-    --brand-wood: #c4975a;
+    --c-brown: #7c3a10;
+    --c-amber: #c9650e;
+    --c-gold: #d4921a;
+    --c-green: #2e5c2e;
+    --c-cream: #f9f5ef;
+    --c-sand: #f0e8d8;
+    --c-border: #e2d4c0;
+    --c-wood: #b88a50;
+    --c-text: #1c1208;
+    --c-muted: #7a6a58;
   }
 }
 
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
+  }
+  html {
+    scroll-behavior: smooth;
   }
   body {
-    @apply bg-background text-foreground;
     font-family: "Golos Text", sans-serif;
-    background-color: var(--brand-cream);
+    background-color: var(--c-cream);
+    color: var(--c-text);
+    -webkit-font-smoothing: antialiased;
   }
   h1,
   h2,
   h3,
-  h4 {
+  h4,
+  h5 {
     font-family: "Oswald", sans-serif;
-    letter-spacing: 0.01em;
+    letter-spacing: 0.015em;
   }
 }
 
 @layer utilities {
+  /* Typography */
   .font-display {
     font-family: "Oswald", sans-serif;
   }
-  .font-body {
-    font-family: "Golos Text", sans-serif;
-  }
 
-  .gradient-text {
-    background: linear-gradient(135deg, #8b4513, #d46a1a);
+  .text-grad {
+    background: linear-gradient(135deg, var(--c-brown) 0%, var(--c-amber) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .text-grad-gold {
+    background: linear-gradient(135deg, var(--c-amber) 0%, var(--c-gold) 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
-  .btn-primary {
-    background: linear-gradient(135deg, #8b4513, #d46a1a);
+  /* Buttons */
+  .btn-cta {
+    background: linear-gradient(135deg, var(--c-brown) 0%, var(--c-amber) 100%);
     color: #fff;
-    box-shadow: 0 4px 20px rgba(139, 69, 19, 0.35);
-    transition: all 0.2s ease;
+    font-family: "Oswald", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    border-radius: 14px;
+    transition: all 0.22s ease;
+    box-shadow: 0 4px 18px rgba(124, 58, 16, 0.3);
+    position: relative;
+    overflow: hidden;
   }
-  .btn-primary:hover {
-    box-shadow: 0 8px 32px rgba(139, 69, 19, 0.5);
-    transform: translateY(-1px);
+  .btn-cta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.12) 0%,
+      transparent 60%
+    );
+    pointer-events: none;
   }
-
-  .btn-green {
-    background: linear-gradient(135deg, #2d5a2d, #3d6b3d);
-    color: #fff;
-    box-shadow: 0 4px 20px rgba(45, 90, 45, 0.3);
-    transition: all 0.2s ease;
-  }
-  .btn-green:hover {
-    box-shadow: 0 8px 32px rgba(45, 90, 45, 0.45);
-    transform: translateY(-1px);
-  }
-
-  .card-wood {
-    background: #ffffff;
-    border: 1px solid var(--brand-border);
-    box-shadow: 0 2px 16px rgba(139, 69, 19, 0.06);
-    transition:
-      box-shadow 0.2s ease,
-      transform 0.2s ease;
-  }
-  .card-wood:hover {
-    box-shadow: 0 8px 32px rgba(139, 69, 19, 0.12);
+  .btn-cta:hover {
     transform: translateY(-2px);
+    box-shadow: 0 10px 32px rgba(124, 58, 16, 0.42);
+  }
+  .btn-cta:active {
+    transform: translateY(0);
   }
 
-  .section-divider {
+  .btn-outline {
+    border: 2px solid var(--c-brown);
+    color: var(--c-brown);
+    font-family: "Oswald", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    border-radius: 14px;
+    transition: all 0.2s ease;
+    background: transparent;
+  }
+  .btn-outline:hover {
+    background: var(--c-brown);
+    color: #fff;
+    transform: translateY(-1px);
+  }
+
+  .btn-ghost-white {
+    border: 2px solid rgba(255, 255, 255, 0.35);
+    color: #fff;
+    font-family: "Oswald", sans-serif;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(8px);
+    transition: all 0.2s ease;
+  }
+  .btn-ghost-white:hover {
+    background: rgba(255, 255, 255, 0.18);
+    border-color: rgba(255, 255, 255, 0.6);
+  }
+
+  /* Cards */
+  .card {
+    background: #fff;
+    border: 1px solid var(--c-border);
+    border-radius: 20px;
+    transition:
+      box-shadow 0.25s ease,
+      transform 0.25s ease;
+    box-shadow: 0 1px 8px rgba(124, 58, 16, 0.05);
+  }
+  .card:hover {
+    box-shadow: 0 12px 40px rgba(124, 58, 16, 0.1);
+    transform: translateY(-3px);
+  }
+
+  .card-sand {
+    background: var(--c-sand);
+    border: 1px solid var(--c-border);
+    border-radius: 20px;
+  }
+
+  /* Badge */
+  .badge-hot {
+    background: linear-gradient(135deg, var(--c-brown), var(--c-amber));
+    color: #fff;
+    font-family: "Oswald", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    padding: 3px 10px;
+    border-radius: 30px;
+  }
+
+  /* Dividers */
+  .divider {
     height: 1px;
     background: linear-gradient(
       90deg,
-      transparent,
-      var(--brand-border),
-      transparent
+      transparent 0%,
+      var(--c-border) 20%,
+      var(--c-border) 80%,
+      transparent 100%
     );
   }
 
-  .pulse-btn {
-    animation: pulseBrown 2.2s ease-in-out infinite;
+  /* Pulse CTA */
+  .pulse-cta {
+    animation: pulseCta 2.4s ease-in-out infinite;
   }
-  @keyframes pulseBrown {
+  @keyframes pulseCta {
     0%,
     100% {
-      box-shadow: 0 4px 20px rgba(139, 69, 19, 0.35);
+      box-shadow: 0 4px 18px rgba(124, 58, 16, 0.3);
     }
     50% {
       box-shadow:
-        0 4px 36px rgba(139, 69, 19, 0.6),
-        0 0 0 8px rgba(139, 69, 19, 0.08);
+        0 6px 36px rgba(124, 58, 16, 0.55),
+        0 0 0 10px rgba(124, 58, 16, 0.06);
     }
   }
 
-  .fade-in-up {
-    animation: fadeInUp 0.6s ease forwards;
+  /* Animations */
+  .anim-up {
+    opacity: 0;
+    transform: translateY(32px);
+    animation: animUp 0.65s cubic-bezier(0.22, 0.68, 0, 1.2) forwards;
   }
-  @keyframes fadeInUp {
-    from {
-      opacity: 0;
-      transform: translateY(28px);
-    }
+  @keyframes animUp {
     to {
       opacity: 1;
       transform: translateY(0);
     }
   }
+  .d1 {
+    animation-delay: 0.08s;
+  }
+  .d2 {
+    animation-delay: 0.2s;
+  }
+  .d3 {
+    animation-delay: 0.34s;
+  }
+  .d4 {
+    animation-delay: 0.48s;
+  }
 
-  .stagger-1 {
-    animation-delay: 0.1s;
-    opacity: 0;
+  /* Step line */
+  .step-line::before {
+    content: "";
+    position: absolute;
+    left: 19px;
+    top: 40px;
+    bottom: -20px;
+    width: 2px;
+    background: linear-gradient(180deg, var(--c-border) 0%, transparent 100%);
   }
-  .stagger-2 {
-    animation-delay: 0.25s;
-    opacity: 0;
+
+  /* Ribbon */
+  .section-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-family: "Oswald", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--c-amber);
+    margin-bottom: 12px;
   }
-  .stagger-3 {
-    animation-delay: 0.4s;
-    opacity: 0;
-  }
-  .stagger-4 {
-    animation-delay: 0.55s;
-    opacity: 0;
+  .section-label::before {
+    content: "";
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--c-amber);
+    border-radius: 2px;
   }
 }
